@@ -1,5 +1,5 @@
 {{- if .Values.virtualservice.enabled }}
-  {{- $hostname := printf "%s%s%s" .Release.Name "." .Values.ingress_host_suffix -}}
+  {{- $hostname := printf "%s%s%s" .Release.Name "." .Values.virtualservice.host_suffix -}}
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:

@@ -1,0 +1,24 @@
+{{- if .Values.virtualservice.enabled  -}}
+  {{- $hostname := printf "%s%s%s" .Release.Name "." .Values.virtualservice.host_suffix -}}
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: {{ .Release.Name }}
+  namespace: istio-system
+spec:
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            remoteIpBlocks:
+              - 167.98.102.254
+              - 79.125.73.252
+      to:
+        - operation:
+            hosts:
+              - {{ $hostname }}
+  selector:
+    matchLabels:
+      app: istio-ingressgateway
+  {{- end }}
+
