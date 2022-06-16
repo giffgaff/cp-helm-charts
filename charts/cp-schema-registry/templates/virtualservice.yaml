@@ -13,9 +13,9 @@ metadata:
     environment: {{ .Values.environment }}
 spec:
   gateways:
-  {{- .Values.virtualservice.gateways }}
+  - {{- .Values.virtualservice.gateways }}
   hosts:
-  {{ $hostname }}
+  - {{ $hostname }}
   http:
   - route:
     - destination:
